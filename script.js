@@ -1,6 +1,5 @@
-const BASE_URL =
-  "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies";
-   
+
+const BASE_URL="https://v6.exchangerate-api.com/v6/1b47c06d29a85ab0610cf698/latest"  
 
   const hero=document.querySelectorAll(".hero select");
   const btn=document.querySelector(".btn");
@@ -38,14 +37,16 @@ const currencyexchange= async (evt)=>{
     amtval=1;
     amt.value="1";
   }
-  const URL = `${BASE_URL}/${fromcurr.value.toLowerCase()}/${tocurr.value.toLowerCase()}.json`;
+  const URL = `${BASE_URL}/${fromcurr.value}`;
 
   let response  =  await fetch(URL);
   let data= await response.json();
+  console.log(tocurr.value);
+  let rate= data.conversion_rates[tocurr.value];
   
-  let rate= data[tocurr.value.toLowerCase()];
   let amount=rate*amt.value;
-  msg.innerHTML =`1${fromcurr.value} = ${amount} ${tocurr.value}`;
+
+  msg.innerHTML =`${amt.value}${fromcurr.value} = ${amount} ${tocurr.value}`;
 }
 btn.addEventListener("click",(evt) => {
   evt.preventDefault();
